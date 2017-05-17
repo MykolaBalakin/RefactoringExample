@@ -8,7 +8,7 @@ namespace Problem17
 {
     public class NumbersToWordsConverter
     {
-        static Dictionary<int, string> units = new Dictionary<int, string>()
+        static readonly IReadOnlyDictionary<int, string> NumberNames = new Dictionary<int, string>()
         {
             [0] = "",
             [1] = "one",
@@ -55,22 +55,22 @@ namespace Problem17
             digit = _number % 100;
             if (digit < 20)
             {
-                numberInWord = units[digit];
+                numberInWord = NumberNames[digit];
                 _number /= 100;
             }
             else
             {
                 digit = _number % 10;
-                numberInWord = units[digit];
+                numberInWord = NumberNames[digit];
                 _number /= 10;
                 digit = (_number % 10) * 10;
-                numberInWord = units[digit] + "-" + numberInWord;
+                numberInWord = NumberNames[digit] + "-" + numberInWord;
                 _number /= 10;
             }
             digit = _number % 10;
             if (digit > 0)
             {
-                numberInWord = units[digit] + " hundred " + (numberInWord != string.Empty ? "and " : "") + numberInWord;
+                numberInWord = NumberNames[digit] + " hundred " + (numberInWord != string.Empty ? "and " : "") + numberInWord;
                 _number /= 10;
             }
             else
@@ -80,7 +80,7 @@ namespace Problem17
             digit = _number % 10;
             if (digit > 0)
             {
-                numberInWord = units[digit] + " thousand " + numberInWord;
+                numberInWord = NumberNames[digit] + " thousand " + numberInWord;
                 _number /= 10;
             }
 
