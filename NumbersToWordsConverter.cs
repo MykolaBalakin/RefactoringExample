@@ -62,7 +62,7 @@ namespace Problem17
                 numberInWord = units[digit];
                 _number /= 10;
                 digit = (_number % 10) * 10;
-                numberInWord = units[digit] + " " + numberInWord;
+                numberInWord = units[digit] + "-" + numberInWord;
                 _number /= 10;
             }
             digit = _number % 10;
@@ -82,7 +82,7 @@ namespace Problem17
                 _number /= 10;
             }
 
-            return numberInWord;
+            return numberInWord.TrimEnd(' ', '-');
         }
     }
 }
