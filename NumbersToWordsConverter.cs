@@ -47,6 +47,11 @@ namespace Problem17
                 throw new ArgumentOutOfRangeException(nameof(number), $"{nameof(number)} should be in the range [1; 1000)");
             }
 
+            if (NumberNames.ContainsKey(number))
+            {
+                return NumberNames[number];
+            }
+
             int _number = 0;
             int digit = 0;
             string numberInWord = "";
