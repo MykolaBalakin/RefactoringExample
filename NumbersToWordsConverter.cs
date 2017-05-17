@@ -10,7 +10,6 @@ namespace Problem17
     {
         static readonly IReadOnlyDictionary<int, string> NumberNames = new Dictionary<int, string>()
         {
-            [0] = "",
             [1] = "one",
             [2] = "two",
             [3] = "three",
@@ -52,44 +51,27 @@ namespace Problem17
                 return NumberNames[number];
             }
 
-            int _number = 0;
-            int digit = 0;
-            string numberInWord = "";
+            if (number < 100)
+            {
+                var tens = number / 10 * 10;
+                var ending = number % 10;
 
-            _number = number;
-            digit = _number % 100;
-            if (digit < 20)
-            {
-                numberInWord = NumberNames[digit];
-                _number /= 100;
-            }
-            else
-            {
-                digit = _number % 10;
-                numberInWord = NumberNames[digit];
-                _number /= 10;
-                digit = (_number % 10) * 10;
-                numberInWord = NumberNames[digit] + "-" + numberInWord;
-                _number /= 10;
-            }
-            digit = _number % 10;
-            if (digit > 0)
-            {
-                numberInWord = NumberNames[digit] + " hundred " + (numberInWord != string.Empty ? "and " : "") + numberInWord;
-                _number /= 10;
-            }
-            else
-            {
-                _number /= 10;
-            }
-            digit = _number % 10;
-            if (digit > 0)
-            {
-                numberInWord = NumberNames[digit] + " thousand " + numberInWord;
-                _number /= 10;
+                return ending == 0
+                    ? Convert(tens)
+                    : $"{Convert(tens)}-{Convert(ending)}";
             }
 
-            return numberInWord.TrimEnd(' ', '-');
+            if (number < 1000)
+            {
+                var hundreds = number / 100;
+                var ending = number % 100;
+
+                return ending == 0
+                    ? $"{Convert(hundreds)} hundred"
+                    : $"{Convert(hundreds)} hundred and {Convert(ending)}";
+            }
+
+            throw new InvalidOperationException();
         }
     }
 }
