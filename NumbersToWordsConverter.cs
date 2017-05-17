@@ -10,6 +10,7 @@ namespace Problem17
     {
         static readonly IReadOnlyDictionary<int, string> NumberNames = new Dictionary<int, string>()
         {
+            [0] = "zero",
             [1] = "one",
             [2] = "two",
             [3] = "three",
@@ -41,9 +42,9 @@ namespace Problem17
 
         public static string Convert(int number)
         {
-            if (number < 1 || number > 1000)
+            if (number < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(number), $"{nameof(number)} should be in the range [1; 1000)");
+                throw new ArgumentOutOfRangeException(nameof(number), $"{nameof(number)} should be non-negative");
             }
 
             if (NumberNames.ContainsKey(number))
@@ -71,7 +72,7 @@ namespace Problem17
                     : $"{Convert(hundreds)} hundred and {Convert(ending)}";
             }
 
-            throw new InvalidOperationException();
+            throw new ArgumentOutOfRangeException(nameof(number), $"{nameof(number)} should be less than 1000");
         }
     }
 }

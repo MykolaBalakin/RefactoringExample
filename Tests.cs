@@ -6,6 +6,7 @@ namespace Problem17
     public class Tests
     {
         [Theory]
+        [InlineData(0, "zero")]
         [InlineData(1, "one")]
         [InlineData(8, "eight")]
         [InlineData(10, "ten")]
