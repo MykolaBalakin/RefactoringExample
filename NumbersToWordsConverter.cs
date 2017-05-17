@@ -42,13 +42,15 @@ namespace Problem17
 
         public static string Convert(int number)
         {
+            if (number < 1 || number > 1000)
+            {
+                throw new ArgumentOutOfRangeException(nameof(number), $"{nameof(number)} should be in the range [1; 1000)");
+            }
+
             int _number = 0;
             int digit = 0;
             string numberInWord = "";
-            if (number < 1 || number > 1000)
-            {
-                return "Number out of range (1-1000)";
-            }
+
             _number = number;
             digit = _number % 100;
             if (digit < 20)
